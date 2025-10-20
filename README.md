@@ -7,11 +7,13 @@
   <!-- GitHub Stats -->
   <img src="https://github-readme-stats.vercel.app/api?username=hrishi3466&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=transparent&locale=en&hide_border=false" height="150" alt="stats graph"  />
 
-  <!-- GIF -->
-  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHMwMWYydzlmd3B2ajg1eGlpcDB0YnJ5YndlaTBnNWRuYzMzMGZnMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1GEATImIxEXVR79Dhk/giphy.gif" height="150" alt="coding gif" />
+ 
 
   <!-- Top Languages -->
   <img src="https://github-readme-stats.vercel.app/api/top-langs?username=hrishi3466&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=6&theme=transparent&hide_border=false" height="150" alt="languages graph"  />
+
+   <!-- GIF -->
+  <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdHMwMWYydzlmd3B2ajg1eGlpcDB0YnJ5YndlaTBnNWRuYzMzMGZnMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1GEATImIxEXVR79Dhk/giphy.gif" height="150" alt="coding gif" />
 </div>
 
 ###
@@ -81,7 +83,5 @@
 
 <!-- Snake Animation -->
 <div align="center">
-<img src="https://raw.githubusercontent.com/hrishi3466/hrishi3466/output/snake.svg" alt="Snake animation" />
+  <img src="https://raw.githubusercontent.com/hrishi3466/hrishi3466/output/snake.svg" alt="Snake animation" />
 </div>
-
-###
