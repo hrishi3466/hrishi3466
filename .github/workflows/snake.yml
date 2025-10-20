@@ -1,8 +1,7 @@
 name: Generate Snake Animation
 
-# Trigger workflow manually or daily
 on:
-  workflow_dispatch:    # manual trigger
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # daily at midnight UTC
 
@@ -11,48 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repo
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # 2️⃣ Create output folder
       - name: Create output folder
         run: mkdir -p output
 
-      # 3️⃣ Generate Snake SVG in root
       - name: Generate Snake Animation
         uses: Platane/snk@v3
         with:
-          github_user_name: hrishi3466          # Your GitHub username
-          output: snake.svg                     # Save in root first
+          github_user_name: hrishi3466
+          output: snake.svg
           palette: github-dark
           color_snake: '#00FF00'
           color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
 
-      # 4️⃣ Move the SVG into the output folder
       - name: Move snake.svg into output folder
         run: mv snake.svg output/snake.svg
 
-      # 5️⃣ Debug: list files to confirm
-      - name: List all files
-        run: ls -R
-
-      # 6️⃣ Optional: Commit snake.svg to repo
-      - name: Commit snake.svg
-        run: |
-          if [ -f output/snake.svg ]; then
-            git config --local user.name "github-actions[bot]"
-            git config --local user.email "github-actions[bot]@users.noreply.github.com"
-            git add output/snake.svg
-            git commit -m "Update Snake animation [skip ci]" || echo "No changes to commit"
-            git push
-          else
-            echo "snake.svg not found, skipping commit"
-          fi
-
-      # 7️⃣ Optional: Upload as workflow artifact
-      - name: Upload snake.svg
-        uses: actions/upload-artifact@v3
+      - name: Upload snake.svg as artifact
+        uses: actions/upload-artifact@v4
         with:
           name: snake-diagram
           path: output/snake.svg
