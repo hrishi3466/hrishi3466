@@ -1,0 +1,18 @@
+name: Snake Animation
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs every day at midnight
+  workflow_dispatch:  # Allows manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Run Snake Game Generator
+        uses: mauve/snake-game-generator-from-github-contributions@main
+        with:
+          username: hrishi3466  # your GitHub username
