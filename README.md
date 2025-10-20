@@ -81,7 +81,7 @@
 
 <!-- Snake Animation -->
 <div align="center">
-  <img src="https://raw.githubusercontent.com/hrishi3466/hrishi3466/output/snake.svg" alt="Snake animation" />
+<img src="https://raw.githubusercontent.com/hrishi3466/hrishi3466/output/snake.svg" alt="Snake animation" />
 </div>
 
 ###
