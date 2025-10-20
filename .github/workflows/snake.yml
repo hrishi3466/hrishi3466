@@ -1,7 +1,8 @@
 name: Generate Snake Animation
 
+# Trigger workflow manually or daily
 on:
-  workflow_dispatch:
+  workflow_dispatch:    # manual trigger
   schedule:
     - cron: '0 0 * * *' # daily at midnight UTC
 
@@ -10,29 +11,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
+      # 1️⃣ Checkout repo
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Create output folder
+      # 2️⃣ Create output folder
       - name: Create output folder
         run: mkdir -p output
 
-      # Generate Snake SVG
+      # 3️⃣ Generate Snake SVG
       - name: Generate Snake Animation
         uses: Platane/snk@v3
         with:
-          github_user_name: hrishi3466
-          output: output/snake.svg
-          palette: github-dark
-          color_snake: '#00FF00'
-          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
+          github_user_name: hrishi3466          # Your GitHub username
+          output: output/snake.svg              # Path to save the SVG
+          palette: github-dark                  # Dark GitHub palette
+          color_snake: '#00FF00'                # Snake color
+          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300' # Dot colors
 
-      # Commit and push back to repo
+      # 4️⃣ Debug: list files to confirm
+      - name: List all files
+        run: ls -R
+
+      # 5️⃣ Commit snake.svg safely
       - name: Commit snake.svg
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/snake.svg
-          git commit -m "Update Snake animation [skip ci]" || echo "No changes to commit"
-          git push
+          if [ -f output/snake.svg ]; then
+            git config --local user.name "github-actions[bot]"
+            git config --local user.email "github-actions[bot]@users.noreply.github.com"
+            git add output/snake.svg
+            git commit -m "Update Snake animation [skip ci]" || echo "No changes to commit"
+            git push
+          else
+            echo "snake.svg not found, skipping commit"
+          fi
