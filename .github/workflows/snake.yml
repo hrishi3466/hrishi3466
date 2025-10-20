@@ -1,18 +1,22 @@
 name: Snake Animation
 
 on:
+  workflow_dispatch:    # allows manual run
   schedule:
-    - cron: "0 0 * * *"  # Runs every day at midnight
-  workflow_dispatch:  # Allows manual trigger
+    - cron: '0 0 * * *' # runs daily at midnight (UTC)
 
 jobs:
-  build:
+  generate-snake:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      # Checkout your repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Run Snake Game Generator
+      # Run the snake game generator
+      - name: Generate Snake SVG
         uses: mauve/snake-game-generator-from-github-contributions@main
         with:
-          username: hrishi3466  # your GitHub username
+          username: hrishi3466      # Your GitHub username
+          output: output/snake.svg  # Ensure output folder exists
