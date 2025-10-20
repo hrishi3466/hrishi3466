@@ -1,21 +1,23 @@
-name: Snake Animation
+name: Generate Snake Animation
 
 on:
-  workflow_dispatch:    # manual trigger
   schedule:
-    - cron: '0 0 * * *' # daily at midnight UTC
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  workflow_dispatch:     # Allows manual trigger
 
 jobs:
-  generate-snake:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      # Checkout repo
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      # Generate the snake
-      - name: Generate Snake SVG
-        uses: mattdavis035/github-contribution-snake@main
+      - name: Generate Snake Animation
+        uses: Platane/snk@v3
         with:
-          github_user: hrishi3466
+          github_user_name: hrishi3466
           output: output/snake.svg
+          palette: github-dark
+          color_snake: '#00FF00'
+          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
