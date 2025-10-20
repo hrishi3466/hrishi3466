@@ -19,21 +19,25 @@ jobs:
       - name: Create output folder
         run: mkdir -p output
 
-      # 3️⃣ Generate Snake SVG
+      # 3️⃣ Generate Snake SVG in root
       - name: Generate Snake Animation
         uses: Platane/snk@v3
         with:
           github_user_name: hrishi3466          # Your GitHub username
-          output: output/snake.svg              # Path to save the SVG
-          palette: github-dark                  # Dark GitHub palette
-          color_snake: '#00FF00'                # Snake color
-          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300' # Dot colors
+          output: snake.svg                     # Save in root first
+          palette: github-dark
+          color_snake: '#00FF00'
+          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
 
-      # 4️⃣ Debug: list files to confirm
+      # 4️⃣ Move the SVG into the output folder
+      - name: Move snake.svg into output folder
+        run: mv snake.svg output/snake.svg
+
+      # 5️⃣ Debug: list files to confirm
       - name: List all files
         run: ls -R
 
-      # 5️⃣ Commit snake.svg safely
+      # 6️⃣ Optional: Commit snake.svg to repo
       - name: Commit snake.svg
         run: |
           if [ -f output/snake.svg ]; then
@@ -45,3 +49,10 @@ jobs:
           else
             echo "snake.svg not found, skipping commit"
           fi
+
+      # 7️⃣ Optional: Upload as workflow artifact
+      - name: Upload snake.svg
+        uses: actions/upload-artifact@v3
+        with:
+          name: snake-diagram
+          path: output/snake.svg
