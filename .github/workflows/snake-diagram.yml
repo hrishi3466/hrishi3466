@@ -1,0 +1,59 @@
+name: Generate Snake Diagram
+
+# Trigger workflow manually or daily
+on:
+  workflow_dispatch:    # manual trigger
+  schedule:
+    - cron: '0 0 * * *' # daily at midnight UTC
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Create output folder
+      - name: Create output folder
+        run: mkdir -p output
+
+      # 3️⃣ Generate Snake SVG in root
+      - name: Generate Snake Animation
+        uses: Platane/snk@v3
+        with:
+          github_user_name: hrishi3466      # Your GitHub username
+          output: snake.svg                 # Generate in root
+          palette: github-dark
+          color_snake: '#00FF00'
+          color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
+
+      # 4️⃣ Debug: show generated files
+      - name: Debug: show generated files
+        run: |
+          echo "Current directory (PWD): $PWD"
+          echo "GitHub workspace (GITHUB_WORKSPACE): $GITHUB_WORKSPACE"
+          
+          echo "Listing files in root:"
+          ls -la
+
+          echo "Listing files in output folder:"
+          ls -la output || echo "output folder is empty or does not exist"
+
+      # 5️⃣ Move snake.svg into output folder
+      - name: Move snake.svg into output folder
+        run: |
+          mkdir -p output
+          if [ -f snake.svg ]; then
+            mv snake.svg output/snake.svg
+          else
+            echo "snake.svg not found, skipping move"
+          fi
+
+      # 6️⃣ Upload snake.svg as artifact
+      - name: Upload snake.svg as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: snake-diagram
+          path: output/snake.svg
