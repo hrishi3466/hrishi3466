@@ -1,6 +1,5 @@
 name: Generate Snake Animation
 
-# Trigger workflow manually or daily
 on:
   workflow_dispatch:
   schedule:
@@ -21,17 +20,24 @@ jobs:
         uses: Platane/snk@v3
         with:
           github_user_name: hrishi3466
-          output: output/snake.svg
+          output: snake.svg                # Generate in root
           palette: github-dark
           color_snake: '#00FF00'
           color_dots: '#00FF00, #00CC00, #009900, #006600, #003300'
 
       - name: Debug: show generated files
         run: |
-          echo "PWD: $PWD"
-          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          echo "Current directory (PWD): $PWD"
+          echo "GitHub workspace (GITHUB_WORKSPACE): $GITHUB_WORKSPACE"
+          
+          echo "Listing files in root:"
           ls -la
-          ls -la output || true
+
+          echo "Listing files in output folder:"
+          ls -la output || echo "output folder is empty or does not exist"
+
+      - name: Move snake.svg into output folder
+        run: mv snake.svg output/snake.svg
 
       - name: Upload snake.svg as artifact
         uses: actions/upload-artifact@v4
